@@ -12,9 +12,19 @@ use yii\bootstrap5\Html;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput([
+    <?= $form->field($model, 'sku')->textInput([
         'maxlength' => true,
-        'placeholder' => 'e.g. Product Brochure, Business Card',
+        'placeholder' => 'e.g. ABC-12345',
+    ]) ?>
+
+    <?= $form->field($model, 'creator')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'e.g. The Beatles',
+    ]) ?>
+
+    <?= $form->field($model, 'product')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'e.g. Abbey Road',
     ]) ?>
 
     <?= $form->field($model, 'url')->textInput([

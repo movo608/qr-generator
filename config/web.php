@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'Muzicash',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -47,14 +48,26 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                'login' => 'site/login',
+                'signup' => 'site/signup',
+                'logout' => 'site/logout',
+                'contact' => 'site/contact',
+                'about' => 'site/about',
+                'qrcodes' => 'qrcode/default/index',
+                'qrcodes/create' => 'qrcode/default/create',
+                'qrcodes/<id:\d+>' => 'qrcode/default/view',
+                'qrcodes/<id:\d+>/update' => 'qrcode/default/update',
+                'qrcodes/<id:\d+>/delete' => 'qrcode/default/delete',
+                'qrcodes/<id:\d+>/download' => 'qrcode/default/download',
+                'qrcodes/import-csv' => 'qrcode/default/import-csv',
+                'qrcodes/process-csv-row' => 'qrcode/default/process-csv-row',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

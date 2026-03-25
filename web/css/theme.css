@@ -1,0 +1,265 @@
+/*
+ * Purple Theme — CSS Custom Properties
+ *
+ * All colour values are defined here as variables.
+ * Swap this file to change the entire dashboard theme.
+ */
+:root {
+  /* === Core palette === */
+  --theme-darkest: #2d1b4e;
+  --theme-darker: #3b2667;
+  --theme-dark: #4a3080;
+  --theme-primary: #6a3fbf;
+  --theme-mid: #7e57c2;
+  --theme-light: #9b7bd4;
+  --theme-lighter: #c4a8e8;
+  --theme-lightest: #ede4f7;
+  --theme-bg: #f8f5fc;
+
+  /* === Semantic tokens === */
+  --navbar-bg: var(--theme-darkest);
+  --navbar-brand: #ffffff;
+  --navbar-link: rgba(255, 255, 255, 0.75);
+  --navbar-link-hover: #ffffff;
+  --navbar-link-active: #ffffff;
+
+  --btn-primary-bg: var(--theme-primary);
+  --btn-primary-border: var(--theme-dark);
+  --btn-primary-hover-bg: var(--theme-dark);
+
+  --btn-success-bg: var(--theme-mid);
+  --btn-success-border: var(--theme-dark);
+  --btn-success-hover-bg: var(--theme-dark);
+
+  --btn-outline-border: var(--theme-light);
+  --btn-outline-text: var(--theme-primary);
+  --btn-outline-hover-bg: var(--theme-primary);
+  --btn-outline-hover-text: #ffffff;
+
+  --btn-danger-bg: #9b3675;
+  --btn-danger-border: #822d63;
+  --btn-danger-hover-bg: #822d63;
+
+  --btn-secondary-bg: var(--theme-light);
+  --btn-secondary-border: var(--theme-mid);
+  --btn-secondary-hover-bg: var(--theme-mid);
+
+  --link-color: var(--theme-primary);
+  --link-hover: var(--theme-dark);
+
+  --footer-bg: var(--theme-lightest);
+  --footer-text: var(--theme-dark);
+
+  --body-bg: var(--theme-bg);
+  --card-border: var(--theme-lighter);
+  --card-header-bg: var(--theme-lightest);
+
+  --breadcrumb-active: var(--theme-mid);
+  --breadcrumb-divider: var(--theme-lighter);
+
+  --sort-arrow-color: var(--theme-primary);
+  --error-text: #9b3675;
+  --error-bg: #f9f0f5;
+  --error-border: #d4a0c0;
+  --hint-color: var(--theme-light);
+
+  --table-striped-bg: var(--theme-lightest);
+  --table-hover-bg: rgba(106, 63, 191, 0.06);
+
+  --input-focus-border: var(--theme-mid);
+  --input-focus-shadow: rgba(106, 63, 191, 0.25);
+}
+
+/* === Global === */
+body {
+  background-color: var(--body-bg);
+}
+
+a {
+  color: var(--link-color);
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* === Navbar === */
+.navbar.bg-dark,
+.navbar-dark.bg-dark {
+  background-color: var(--navbar-bg) !important;
+}
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-brand:hover {
+  color: var(--navbar-brand);
+  font-family: "Roboto", sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--navbar-link);
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--navbar-link-hover);
+}
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .show > .nav-link {
+  color: var(--navbar-link-active);
+}
+.navbar-dark .navbar-toggler {
+  border-color: var(--theme-light);
+}
+
+/* === Buttons === */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  border-color: var(--btn-primary-border);
+  color: #fff;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--btn-primary-hover-bg);
+  border-color: var(--btn-primary-border);
+  color: #fff;
+}
+
+.btn-success {
+  background-color: var(--btn-success-bg);
+  border-color: var(--btn-success-border);
+  color: #fff;
+}
+.btn-success:hover,
+.btn-success:focus {
+  background-color: var(--btn-success-hover-bg);
+  border-color: var(--btn-success-border);
+  color: #fff;
+}
+
+.btn-outline-secondary {
+  border-color: var(--btn-outline-border);
+  color: var(--btn-outline-text);
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  background-color: var(--btn-outline-hover-bg);
+  border-color: var(--btn-outline-hover-bg);
+  color: var(--btn-outline-hover-text);
+}
+
+.btn-danger {
+  background-color: var(--btn-danger-bg);
+  border-color: var(--btn-danger-border);
+  color: #fff;
+}
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: var(--btn-danger-hover-bg);
+  border-color: var(--btn-danger-border);
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  border-color: var(--btn-secondary-border);
+  color: #fff;
+}
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-border);
+  color: #fff;
+}
+
+/* === Footer === */
+.footer,
+footer.bg-light,
+#footer.bg-light {
+  background-color: var(--footer-bg) !important;
+}
+#footer .text-muted {
+  color: var(--footer-text) !important;
+}
+
+/* === Cards === */
+.card {
+  border-color: var(--card-border);
+}
+.card-header {
+  background-color: var(--card-header-bg);
+  border-bottom-color: var(--card-border);
+}
+
+/* === Breadcrumbs === */
+.breadcrumb-item.active {
+  color: var(--breadcrumb-active);
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  color: var(--breadcrumb-divider);
+}
+
+/* === Tables === */
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: var(--table-striped-bg);
+}
+.table-hover > tbody > tr:hover > * {
+  background-color: var(--table-hover-bg);
+}
+
+/* === Forms === */
+.form-control:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 0.25rem var(--input-focus-shadow);
+}
+
+/* === Pagination (button style) === */
+.pagination {
+  gap: 4px;
+}
+.page-link {
+  color: var(--theme-primary);
+  background-color: #fff;
+  border-color: var(--theme-light);
+  border-radius: 4px !important;
+  min-width: 36px;
+  text-align: center;
+  cursor: pointer;
+}
+.page-link:hover {
+  color: #fff;
+  background-color: var(--theme-primary);
+  border-color: var(--theme-primary);
+}
+.page-item.active .page-link {
+  color: #fff;
+  background-color: var(--theme-primary);
+  border-color: var(--theme-dark);
+}
+.page-item.disabled .page-link {
+  color: var(--theme-lighter);
+  background-color: var(--theme-lightest);
+  border-color: var(--theme-lighter);
+  cursor: not-allowed;
+}
+
+/* === Dropdown === */
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: var(--theme-primary);
+}
+
+/* === Checkbox / Radio custom accent === */
+.form-check-input:checked {
+  background-color: var(--theme-primary);
+  border-color: var(--theme-primary);
+}
+.form-check-input:focus {
+  border-color: var(--theme-mid);
+  box-shadow: 0 0 0 0.25rem var(--input-focus-shadow);
+}
+
+/* === Alert success (flash messages) === */
+.alert-success {
+  background-color: var(--theme-lightest);
+  border-color: var(--theme-lighter);
+  color: var(--theme-darker);
+}

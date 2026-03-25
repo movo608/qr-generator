@@ -3,7 +3,7 @@ main > .container {
 }
 
 .footer {
-    background-color: #f5f5f5;
+    background-color: var(--footer-bg);
     font-size: .9em;
     height: 60px;
 }
@@ -14,7 +14,7 @@ main > .container {
 }
 
 .not-set {
-    color: #c55;
+    color: var(--error-text);
     font-style: italic;
 }
 
@@ -31,12 +31,12 @@ a.asc:after, a.desc:after {
 }
 
 a.asc:after {
-    border-bottom: solid 7px #212529;
+    border-bottom: solid 7px var(--sort-arrow-color);
     border-top-width: 0;
 }
 
 a.desc:after {
-    border-top: solid 7px #212529;
+    border-top: solid 7px var(--sort-arrow-color);
     border-bottom-width: 0;
 }
 
@@ -47,13 +47,13 @@ a.desc:after {
 .hint-block {
     display: block;
     margin-top: 5px;
-    color: #999;
+    color: var(--hint-color);
 }
 
 .error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
+    color: var(--error-text);
+    background: var(--error-bg);
+    border-left: 3px solid var(--error-border);
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
@@ -61,7 +61,7 @@ a.desc:after {
 /* align the logout "link" (button in form) of the navbar */
 .nav li > form > button.logout {
     padding-top: 7px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--navbar-link);
 }
 
 @media(max-width:767px) {
@@ -76,7 +76,7 @@ a.desc:after {
 .nav > li > form > button.logout:focus,
 .nav > li > form > button.logout:hover {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--navbar-link-hover);
 }
 
 .nav > li > form > button.logout:focus {

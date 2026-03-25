@@ -6,7 +6,7 @@
 use yii\bootstrap5\Html;
 use yii\widgets\DetailView;
 
-$this->title = $model->name;
+$this->title = $model->product;
 $this->params['breadcrumbs'][] = ['label' => 'My QR Codes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -32,7 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'model' => $model,
                 'attributes' => [
                     'id',
-                    'name',
+                    'sku',
+                    'creator',
+                    'product',
                     [
                         'attribute' => 'url',
                         'format' => 'raw',
@@ -55,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h5 class="card-title">QR Code Preview</h5>
                     <div class="my-3">
                         <?= Html::img($model->qrImageUrl, [
-                            'alt' => 'QR Code for ' . Html::encode($model->name),
+                            'alt' => 'QR Code for ' . Html::encode($model->product),
                             'style' => 'max-width: 300px;',
                         ]) ?>
                     </div>

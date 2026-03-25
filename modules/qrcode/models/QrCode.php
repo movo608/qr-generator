@@ -13,7 +13,9 @@ use chillerlan\QRCode\Output\QRGdImagePNG;
 /**
  * @property int $id
  * @property int $user_id
- * @property string $name
+ * @property string $sku
+ * @property string $creator
+ * @property string $product
  * @property string $url
  * @property string $qr_image_path
  * @property int $created_at
@@ -37,8 +39,8 @@ class QrCode extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'url'], 'required'],
-            ['name', 'string', 'max' => 255],
+            [['sku', 'creator', 'product', 'url'], 'required'],
+            [['sku', 'creator', 'product'], 'string', 'max' => 255],
             ['url', 'url', 'defaultScheme' => 'https'],
         ];
     }
@@ -47,7 +49,9 @@ class QrCode extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Product Name',
+            'sku' => 'SKU',
+            'creator' => 'Artist / Band',
+            'product' => 'Album',
             'url' => 'URL',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

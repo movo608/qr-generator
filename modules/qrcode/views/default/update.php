@@ -5,9 +5,9 @@
 
 use yii\bootstrap5\Html;
 
-$this->title = 'Update: ' . $model->name;
+$this->title = 'Update: ' . $model->product;
 $this->params['breadcrumbs'][] = ['label' => 'My QR Codes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->product, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="qrcode-update">
