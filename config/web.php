@@ -64,6 +64,7 @@ $config = [
                 'qrcodes/<id:\d+>/update' => 'qrcode/default/update',
                 'qrcodes/<id:\d+>/delete' => 'qrcode/default/delete',
                 'qrcodes/<id:\d+>/download' => 'qrcode/default/download',
+                'qrcodes/download-zip' => 'qrcode/default/download-zip',
                 'qrcodes/import-csv' => 'qrcode/default/import-csv',
                 'qrcodes/process-csv-row' => 'qrcode/default/process-csv-row',
             ],

@@ -11,6 +11,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use app\modules\qrcode\models\QrCode;
+use app\modules\qrcode\models\QrCodeSearch;
 
 class DefaultController extends Controller
 {
@@ -32,6 +33,7 @@ class DefaultController extends Controller
                     'delete' => ['POST'],
                     'import-csv' => ['POST'],
                     'process-csv-row' => ['POST'],
+                    'download-zip' => ['POST'],
                 ],
             ],
         ];
@@ -39,12 +41,11 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => QrCode::find()->where(['user_id' => Yii::$app->user->id]),
-            'sort' => ['defaultOrder' => ['created_at' => SORT_DESC]],
-        ]);
+        $searchModel = new QrCodeSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -106,6 +107,71 @@ class DefaultController extends Controller
         $filename = preg_replace('/[^a-zA-Z0-9_-]/', '_', $model->product) . '_qr.png';
 
         return Yii::$app->response->sendFile($filePath, $filename);
+    }
+
+    public function actionDownloadZip()
+    {
+        $ids = Yii::$app->request->post('ids', []);
+        $ids = array_slice((array) $ids, 0, 500);
+        if (empty($ids)) {
+            Yii::$app->session->setFlash('error', 'No QR codes selected.');
+            return $this->redirect(['index']);
+        }
+
+        $models = QrCode::find()
+            ->where(['id' => $ids, 'user_id' => Yii::$app->user->id])
+            ->all();
+
+        if (empty($models)) {
+            Yii::$app->session->setFlash('error', 'No valid QR codes found.');
+            return $this->redirect(['index']);
+        }
+
+        $tempDir = Yii::getAlias('@runtime');
+        $tempFile = $tempDir . '/qr_download_' . uniqid() . '.zip';
+        $zip = new \ZipArchive();
+        if ($zip->open($tempFile, \ZipArchive::CREATE) !== true) {
+            Yii::$app->session->setFlash('error', 'Could not create zip file.');
+            return $this->redirect(['index']);
+        }
+
+        $usedNames = [];
+        foreach ($models as $model) {
+            $filePath = Yii::getAlias('@webroot') . $model->qr_image_path;
+            if (!$model->qr_image_path || !file_exists($filePath)) {
+                continue;
+            }
+
+            $sanitize = function ($str) {
+                return preg_replace('/[^a-zA-Z0-9_-]/', '_', trim($str));
+            };
+
+            $baseName = $sanitize($model->creator) . '_' . $sanitize($model->product) . '_' . $sanitize($model->sku);
+
+            // Ensure unique filenames within the zip
+            $fileName = $baseName . '.png';
+            $counter = 1;
+            while (isset($usedNames[$fileName])) {
+                $fileName = $baseName . '_' . $counter . '.png';
+                $counter++;
+            }
+            $usedNames[$fileName] = true;
+
+            $zip->addFile($filePath, $fileName);
+        }
+
+        $zip->close();
+
+        if (empty($usedNames)) {
+            @unlink($tempFile);
+            Yii::$app->session->setFlash('error', 'None of the selected QR codes have images available.');
+            return $this->redirect(['index']);
+        }
+
+        Yii::$app->response->on(Response::EVENT_AFTER_SEND, function () use ($tempFile) {
+            @unlink($tempFile);
+        });
+        return Yii::$app->response->sendFile($tempFile, 'qr_codes.zip');
     }
 
     public function actionImportCsv()
